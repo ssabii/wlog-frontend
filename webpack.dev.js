@@ -13,8 +13,7 @@ module.exports = merge(common, {
     historyApiFallback: {
       rewrites: [{ from: /./, to: "/index.html" }],
     },
-    hot: true,
-    port: 6927,
+    port: 9564,
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS",
