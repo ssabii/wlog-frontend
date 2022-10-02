@@ -1,5 +1,4 @@
 import { action, computed, observable } from "mobx";
-import ReactGA from "react-ga";
 
 import config from "config";
 import { formatError } from "lib/error";
@@ -75,12 +74,6 @@ export default class Auth {
       this.profile = { name: "test" }; // getProfile()
       this.startUpdateTokenTimer();
       sessionStorage.setItem(tokenStorageKey, JSON.stringify(this.user));
-
-      ReactGA.event({
-        category: "Auth",
-        action: `Logged in (${option.code ? "manual" : "auto"})`,
-        label: `Logged in to ${this.profile && this.profile.name}`,
-      });
     } catch (e) {
       this.user = null;
       this.profile = undefined;
@@ -254,13 +247,6 @@ export default class Auth {
   private clearSession = async (isExplicit: boolean) => {
     try {
       sessionStorage.removeItem(tokenStorageKey);
-
-      ReactGA.event({
-        category: "Auth",
-        action: `Logged out (${isExplicit ? "manual" : "auto"})`,
-        label: `Logged out by ${this.profile && this.profile.name}`,
-      });
-
       localStorage.setItem("clearSession", Date.now().toString());
       this.unwatchStorageEvent();
       localStorage.removeItem("getSessionStorage");

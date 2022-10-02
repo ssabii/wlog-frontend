@@ -1,8 +1,6 @@
 import { forEach } from "lodash-es";
 import { observable, action, runInAction } from "mobx";
 
-import { logError } from "lib/error";
-import DefaultError from "lib/error/DefaultError";
 import { getBoundsFromPolygons } from "lib/map";
 import type {
   LatLng,
@@ -550,7 +548,6 @@ export default class NaverMapStore {
         }
       });
     } catch (e) {
-      logError(e as DefaultError);
       runInAction(() => {
         this.isLoadingScript = false;
         this.canUseMap = false;
