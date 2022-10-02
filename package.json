@@ -25,7 +25,6 @@
     "redoc": "redoc-cli serve -p 30001",
     "cypress:open": "cross-env stage=$stage cypress open",
     "cypress:run": "cross-env stage=$stage cypress run",
-    "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
@@ -70,7 +69,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "fork-ts-checker-webpack-plugin": "^6.5.0",
-    "husky": "^7.0.1",
     "jest": "^26.4.2",
     "lint-staged": "^11.1.1",
     "postcss": "^8.4.5",
@@ -91,9 +89,6 @@
     "@meshkorea/cake-form": "3.1.5",
     "@meshkorea/vroong-design-system-web": "2.1.92-dependency-fix.2",
     "@openapitools/openapi-generator-cli": "^2.1.18",
-    "@sentry/react": "^6.16.1",
-    "@sentry/tracing": "^6.16.1",
-    "@sentry/webpack-plugin": "^1.18.4",
     "@swc/core": "^1.2.133",
     "axios": "^0.20.0",
     "browserslist": "^4.19.1",
