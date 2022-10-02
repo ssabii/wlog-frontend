@@ -2,31 +2,25 @@
 const replace = require("replace-in-file");
 const shell = require("shelljs");
 
-const commonCustomizations = [
-  {
-    files: ["src/runtime.ts"],
-    from: "GlobalFetch",
-    to: "WindowOrWorkerGlobalScope",
-  },
-  {
-    files: ["src/runtime.ts"],
-    from: ".join(`&${encodeURIComponent(fullKey)}=`)", // eslint-disable-line
-    to: ".join(`&${encodeURIComponent(fullKey)}[]=`)", // eslint-disable-line
-  },
-  {
-    files: ["src/runtime.ts"],
-    from: "${encodeURIComponent(fullKey)}=${multiValue}", // eslint-disable-line
-    to: "${encodeURIComponent(fullKey)}[]=${multiValue}", // eslint-disable-line
-  },
-];
+// const commonCustomizations = [
+//   {
+//     files: ["src/runtime.ts"],
+//     from: "GlobalFetch",
+//     to: "WindowOrWorkerGlobalScope",
+//   },
+//   {
+//     files: ["src/runtime.ts"],
+//     from: ".join(`&${encodeURIComponent(fullKey)}=`)", // eslint-disable-line
+//     to: ".join(`&${encodeURIComponent(fullKey)}[]=`)", // eslint-disable-line
+//   },
+//   {
+//     files: ["src/runtime.ts"],
+//     from: "${encodeURIComponent(fullKey)}=${multiValue}", // eslint-disable-line
+//     to: "${encodeURIComponent(fullKey)}[]=${multiValue}", // eslint-disable-line
+//   },
+// ];
 
-const apis = [
-  {
-    name: "naverOpenApi",
-    specLocation: "./apiSpecs/naverOpenApi.yaml",
-    customizations: commonCustomizations,
-  },
-];
+const apis = [];
 const apiClientsDir = "./src/apiClients";
 
 shell.rm("-r", apiClientsDir);
