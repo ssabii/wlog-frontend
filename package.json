@@ -82,7 +82,7 @@
   },
   "dependencies": {
     "@meshkorea/cake-form": "3.1.5",
-    "@meshkorea/vroong-design-system-web": "2.1.92-dependency-fix.2",
+    "@meshkorea/vroong-design-system-web": "2.5.3",
     "@openapitools/openapi-generator-cli": "^2.1.18",
     "@swc/core": "^1.2.133",
     "axios": "^0.20.0",
