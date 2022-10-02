@@ -26,11 +26,6 @@ export default class Core {
     this.dialog = new Dialog();
     this.router = new Router();
     this.popUp = new PopUp();
-
-    // expose core during tests
-    if ((window as any).Cypress) {
-      (window as any).core = this;
-    }
   }
 
   public addStore = (key: string, store: any) => {

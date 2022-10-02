@@ -11,7 +11,7 @@
     "lint": "eslint src --ext .js,.ts,.tsx --max-warnings 0 --cache",
     "check-type": "tsc --noEmit --skipLibCheck",
     "test": "jest --passWithNoTests",
-    "test:all": "concurrently \"yarn test\" \"yarn cypress:run\"",
+    "test:all": "concurrently \"yarn test\"",
     "test:watch": "jest --passWithNoTests --watch",
     "test:coverage": "jest --collectCoverage --passWithNoTests",
     "prebuild": "yarn build:clean",
@@ -23,8 +23,6 @@
     "postinstall": "patch-package && yarn generate-apis",
     "generate-apis": "node ./scripts/generateApis.js",
     "redoc": "redoc-cli serve -p 30001",
-    "cypress:open": "cross-env stage=$stage cypress open",
-    "cypress:run": "cross-env stage=$stage cypress run",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
@@ -39,7 +37,6 @@
     ]
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^4.1.0",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@swc/cli": "^0.1.55",
     "@swc/jest": "^0.2.17",
@@ -59,7 +56,6 @@
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
     "@typescript-eslint/types": "^5.10.0",
-    "cypress": "^3.4.1",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
