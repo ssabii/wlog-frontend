@@ -1,21 +1,14 @@
 import React from "react";
 
-import { UaaLoginBody, UaaLoginProvider } from "modules/auth/uaa-login";
-// import {
-//   PasswordLoginBody,
-//   PasswordLoginProvider,
-// } from "modules/auth/password-login";
+import {
+  PasswordLoginBody,
+  PasswordLoginProvider,
+} from "modules/auth/password-login";
 
 const LoginPage = () => (
-  <UaaLoginProvider>
-    <UaaLoginBody />
-  </UaaLoginProvider>
+  <PasswordLoginProvider>
+    <PasswordLoginBody />
+  </PasswordLoginProvider>
 );
-
-// const LoginPage = () => (
-//   <PasswordLoginProvider>
-//     <PasswordLoginBody />
-//   </PasswordLoginProvider>
-// );
 
 export default LoginPage;

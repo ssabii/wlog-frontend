@@ -5,7 +5,6 @@ import {
 } from "@meshkorea/vroong-design-system-web";
 import { observer } from "mobx-react";
 import React, { useCallback } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { usePasswordLoginStores } from "../PasswordLoginProvider";
@@ -52,14 +51,6 @@ const PasswordLoginPageBody = observer(() => {
           Login
         </LoginButton>
       </LoginBox>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      </ul>
     </Wrapper>
   );
 });
