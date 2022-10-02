@@ -1,6 +1,5 @@
 import { ButtonV2 } from "@meshkorea/vroong-design-system-web";
 import React, { useCallback } from "react";
-import { hot } from "react-hot-loader/root";
 import { Link } from "react-router-dom";
 
 import { useCore } from "core";
@@ -41,4 +40,4 @@ const HomePage = () => {
   );
 };
 
-export default hot(HomePage);
+export default HomePage;

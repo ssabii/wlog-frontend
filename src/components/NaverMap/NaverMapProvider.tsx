@@ -1,15 +1,14 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
-import { hot } from "react-hot-loader/root";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import Core, { useCore } from "core";
 import LatLng from "lib/types/LatLng";
 import {
   Bounds,
+  Circle,
+  MapOptions,
   Marker,
   Polygon,
   Polyline,
-  MapOptions,
-  Circle,
 } from "lib/types/NaverMapTypes";
 
 import NaverMap, { NaverMapProps } from "./NaverMap";
@@ -112,4 +111,4 @@ const NaverMapProvider = (props: NaverMapProviderProps) => {
   );
 };
 
-export default hot(NaverMapProvider);
+export default NaverMapProvider;
