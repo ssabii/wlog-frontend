@@ -1,11 +1,10 @@
 {
-  "name": "mesh-web-boilerplate",
-  "version": "3.0.0",
+  "name": "wlog-frontend",
+  "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/meshkorea/mesh-web-boilerplate",
-  "author": "Mesh Korea",
+  "repository": "https://github.com/ssabii/wlog-frontend",
+  "author": "ssabi",
   "license": "UNLICENSED",
-  "private": true,
   "scripts": {
     "start": "cross-env stage=$stage webpack-dev-server --config webpack.dev.js",
     "lint": "eslint src --ext .js,.ts,.tsx --max-warnings 0 --cache",
