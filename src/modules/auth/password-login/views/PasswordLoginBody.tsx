@@ -25,13 +25,13 @@ const PasswordLoginPageBody = observer(() => {
   return (
     <Wrapper>
       <LoginBox>
-        <h1>Login</h1>
+        <h1>로그인</h1>
         <LoginTextInputWrapper>
           <LoginLabel htmlFor="login-username">아이디</LoginLabel>
           <TextInputV2
             id="login-username"
             {...form.getSimpleProps("username")}
-            size="lg"
+            size="md"
             width="100%"
             onChange={handleUsernameChange}
           />
@@ -41,13 +41,13 @@ const PasswordLoginPageBody = observer(() => {
           <TextInputV2
             id="login-password"
             {...form.getSimpleProps("password")}
-            size="lg"
+            size="md"
             width="100%"
             type="password"
             onChange={handlePasswordChange}
           />
         </LoginTextInputWrapper>
-        <LoginButton status="primary" onClick={login} size="lg">
+        <LoginButton status="primary" onClick={login} size="md">
           Login
         </LoginButton>
       </LoginBox>
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 `;
 
 const LoginBox = styled.div`
-  width: 500px;
+  width: 400px;
 `;
 
 const LoginButton = styled(ButtonV2)`
