@@ -1,6 +1,5 @@
 /* eslint-disable camelcase, class-methods-use-this, no-await-in-loop */
-import config from "config";
-import { formatError } from "lib/error";
+import auth from "api/auth";
 
 export interface TokenResultDTO {
   access_token: string;
@@ -14,18 +13,16 @@ export interface TokenResultDTO {
 
 // TokenResultDTO의 access_token의 payload가 객체로 파싱된 후 인터페이스
 interface AccessTokenDTO {
-  user_name: string;
-  authorities: string[];
-  client_id: string;
-  scope: string[];
-  exp: number;
+  id: string;
+  username: string;
+  displayName: string;
   iat: number;
-  jti: string;
+  exp: number;
 }
-
 export interface AccessTokenResult {
-  userName: string;
-  authorities: string[];
+  id: string;
+  username: string;
+  displayName: string;
   accessToken: string;
   refreshToken: string;
   tokenExpireTime: number;
@@ -44,75 +41,56 @@ export interface UaaTokenApi {
 export const getPayloadFromJWT = (encodded: string) =>
   JSON.parse(atob(encodded.split(".")[1])) as AccessTokenDTO;
 
-export const uaaApi: UaaTokenApi = {
-  async getToken(option: TokenEndpointRequestOption): Promise<TokenResultDTO> {
-    let requestBody;
-
-    if (option.code) {
-      requestBody = {
-        grant_type: "authorization_code",
-        code: option.code,
-        redirect_uri: `${window.location.origin}/authorize`,
-      };
-    } else if (option.refreshToken) {
-      requestBody = {
-        grant_type: "refresh_token",
-        refresh_token: option.refreshToken,
-      };
-    }
-
-    requestBody = new URLSearchParams(requestBody);
-
-    const res = await fetch(`${config.oauth.basePath}/api/oauth/token`, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${btoa(
-          `${config.oauth.clientId}:${config.oauth.clientSecret}`,
-        )}`,
-        "Content-Type": "application/x-www-form-urlencoded;",
-      },
-      body: requestBody.toString(),
-    });
-
-    const body = await res.json();
-    return body;
-  },
-};
-
 export class AuthService {
-  public async getAccessToken(
-    option: TokenEndpointRequestOption,
+  public async login(
+    username: string,
+    password: string,
   ): Promise<AccessTokenResult> {
     try {
-      let tokenRes: TokenResultDTO;
-      for (let count = 0; count < 6; count += 1) {
-        tokenRes = await uaaApi.getToken(option);
-
-        if ("error" in tokenRes) {
-          if (count === 5) {
-            throw tokenRes;
-          }
-
-          await new Promise<void>((res) => {
-            setTimeout(() => res(), 200);
-          });
-        } else {
-          break;
-        }
-      }
-
-      const accessTokenPayload = getPayloadFromJWT(tokenRes!.access_token);
+      const res = await auth.login(username, password);
+      const { accessToken, refreshToken } = res.data.token;
+      const accessTokenPayload = getPayloadFromJWT(accessToken);
 
       return {
-        userName: accessTokenPayload.user_name,
-        accessToken: tokenRes!.access_token,
-        refreshToken: tokenRes!.refresh_token,
-        authorities: accessTokenPayload.authorities,
-        tokenExpireTime: accessTokenPayload.exp * 1000,
-        tokenIssueTime: accessTokenPayload.iat * 1000,
+        id: accessTokenPayload.id,
+        username: accessTokenPayload.username,
+        displayName: accessTokenPayload.displayName,
+        accessToken,
+        refreshToken,
+        tokenExpireTime: accessTokenPayload.exp,
+        tokenIssueTime: accessTokenPayload.iat,
       };
     } catch (e) {
-      throw await formatError(e);
+      throw await e;
+    }
+  }
+
+  public async refresh() {
+    try {
+      const res = await auth.refresh();
+      const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+        res.data.token;
+      const accessTokenPayload = getPayloadFromJWT(newAccessToken);
+
+      return {
+        id: accessTokenPayload.id,
+        username: accessTokenPayload.username,
+        displayName: accessTokenPayload.displayName,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        tokenExpireTime: accessTokenPayload.exp,
+        tokenIssueTime: accessTokenPayload.iat,
+      };
+    } catch (e) {
+      throw await e;
+    }
+  }
+
+  public async logout() {
+    try {
+      await auth.logout();
+    } catch (e) {
+      throw await e;
     }
   }
 }
