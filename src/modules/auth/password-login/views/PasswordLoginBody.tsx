@@ -4,7 +4,7 @@ import {
   TextInputV2,
 } from "@meshkorea/vroong-design-system-web";
 import { observer } from "mobx-react";
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { usePasswordLoginStores } from "../PasswordLoginProvider";
@@ -13,38 +13,27 @@ const PasswordLoginPageBody = observer(() => {
   const { passwordLoginStore } = usePasswordLoginStores();
   const { form, login } = passwordLoginStore;
 
-  const handleUsernameChange = useCallback(
-    (username) => form.update({ username }),
-    [form],
-  );
-  const handlePasswordChange = useCallback(
-    (password) => form.update({ password }),
-    [form],
-  );
-
   return (
     <Wrapper>
       <LoginBox>
         <h1>로그인</h1>
         <LoginTextInputWrapper>
-          <LoginLabel htmlFor="login-username">아이디</LoginLabel>
+          <LoginLabel htmlFor="username">아이디</LoginLabel>
           <TextInputV2
-            id="login-username"
-            {...form.getSimpleProps("username")}
+            id="username"
             size="md"
             width="100%"
-            onChange={handleUsernameChange}
+            {...form.getSimpleProps("username")}
           />
         </LoginTextInputWrapper>
         <LoginTextInputWrapper>
-          <LoginLabel htmlFor="login-password">비밀번호</LoginLabel>
+          <LoginLabel htmlFor="password">비밀번호</LoginLabel>
           <TextInputV2
-            id="login-password"
-            {...form.getSimpleProps("password")}
+            id="password"
             size="md"
             width="100%"
             type="password"
-            onChange={handlePasswordChange}
+            {...form.getSimpleProps("password")}
           />
         </LoginTextInputWrapper>
         <LoginButton status="primary" onClick={login} size="md">
