@@ -1,8 +1,6 @@
 import { setHeaders } from "api";
 import { action, computed, observable } from "mobx";
 
-import { formatError } from "lib/error";
-
 // 여기서는 type만 사용하기 때문에, import type문 사용 (사용하지 않을 경우 circular dependency 발생)
 import type Core from "./Core";
 import { AccessTokenResult as User, AuthService } from "./services/AuthService";
@@ -81,6 +79,9 @@ export default class Auth {
       this.core.dialog.openAlert({
         title: "인증 실패",
         message: "사용자 인증에 실패하였습니다.",
+        onConfirm: () => {
+          this.clearSession(false);
+        },
       });
     }
   };
@@ -161,15 +162,16 @@ export default class Auth {
   };
 
   @action
-  private clearSession = async (isExplicit: boolean) => {
+  private clearSession = (isExplicit: boolean) => {
     try {
+      sessionStorage.removeItem(tokenStorageKey);
       window.clearInterval(this.tokenTimer);
       this.user = isExplicit ? undefined : null;
     } catch (e) {
-      const formattedError = await formatError(e);
+      const error = e as Error;
       this.core.dialog.openAlert({
         title: "세션 만료",
-        message: formattedError.displayMessage,
+        message: error.message,
       });
     }
   };
