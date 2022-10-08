@@ -1,5 +1,3 @@
-import { AxiosError } from "axios";
-
 import { likeHtmlRegExp } from "lib/regExps";
 
 import DefaultError from "./DefaultError";
@@ -53,15 +51,6 @@ export default async function formatError(
 
   // Error: JavaScript Error
   if (errorRes instanceof Error) {
-    // axios error
-    if ((errorRes as AxiosError).isAxiosError) {
-      return {
-        source: "client",
-        displayMessage: (errorRes as AxiosError).response?.data,
-        additionalInfo: errorRes,
-      };
-    }
-
     // developer defined error
     if (errorRes.name === "Error") {
       return {
