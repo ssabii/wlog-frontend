@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "config";
 
 const client = axios.create({
-  baseURL: config.api.basePath,
+  baseURL: config.api.baseURL,
 });
 
 export const setHeaders = (accessToken: string, refreshToken: string) => {

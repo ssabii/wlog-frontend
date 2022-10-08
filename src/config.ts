@@ -10,7 +10,7 @@ const config = {
   routerBaseName: env.FEATURE_CONTEXT ?? process.env.FEATURE_CONTEXT,
   version: VERSION,
   api: {
-    basePath: env.API_BASE_PATH ?? process.env.API_BASE_PATH,
+    baseURL: env.API_BASE_URL ?? process.env.API_BASE_URL,
   },
 };
 
