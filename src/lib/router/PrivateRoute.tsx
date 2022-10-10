@@ -19,13 +19,13 @@ const PrivateRoute = observer(
 
     const renderFallback = (props: RouteProps) => {
       const { location } = props;
-      if (!location) return <Redirect to="/welcome" />;
+      if (!location) return <Redirect to="/login" />;
 
       const redirect = `${location.pathname}${encodeURIComponent(
         location.search,
       )}${location.hash}`;
       const to =
-        redirect === "/" ? "/welcome" : `/welcome?redirect=${redirect}`;
+        redirect === "/main" ? "/login" : `/login?redirect=${redirect}`;
 
       return <Redirect to={to} />;
     };

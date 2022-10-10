@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
+import { PrivateRoute } from "lib/router";
+
 import Layout from "../Layout";
 
 const HomePage = lazy(() => import("./home/HomePage"));
@@ -11,8 +13,8 @@ const Routes = () => (
   <Layout>
     <Suspense fallback={<div />}>
       <Switch>
-        <Route exact path="/main" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
+        <PrivateRoute exact path="/main" component={HomePage} />
+        <Route exact path="/login" component={LoginPage} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
