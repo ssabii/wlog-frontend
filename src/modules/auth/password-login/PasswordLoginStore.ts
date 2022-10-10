@@ -16,6 +16,12 @@ export default class PasswordLoginStore {
 
   @action
   public login = async () => {
+    const isValid = await this.form.validate();
+
+    if (!isValid) {
+      return;
+    }
+
     await this.core.auth.login(this.form.username, this.form.password);
   };
 }
