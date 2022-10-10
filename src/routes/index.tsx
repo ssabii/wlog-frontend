@@ -11,7 +11,7 @@ const Routes = () => (
   <Layout>
     <Suspense fallback={<div />}>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/main" component={HomePage} />
         <Route path="/login" component={LoginPage} />
         <Route component={NotFound} />
       </Switch>
