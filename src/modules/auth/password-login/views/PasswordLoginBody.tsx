@@ -1,10 +1,12 @@
 import {
   ButtonV2,
-  Label,
+  Card,
+  foundations,
   TextInputV2,
 } from "@meshkorea/vroong-design-system-web";
 import { observer } from "mobx-react";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { usePasswordLoginStores } from "../PasswordLoginProvider";
@@ -15,30 +17,33 @@ const PasswordLoginPageBody = observer(() => {
 
   return (
     <Wrapper>
-      <LoginBox>
+      <LoginBox radius="6px">
         <h1>로그인</h1>
         <LoginTextInputWrapper>
-          <LoginLabel htmlFor="username">아이디</LoginLabel>
           <TextInputV2
             id="username"
             size="md"
             width="100%"
-            {...form.getSimpleProps("username")}
+            placeholder="아이디"
+            {...form.getProps("username")}
           />
         </LoginTextInputWrapper>
         <LoginTextInputWrapper>
-          <LoginLabel htmlFor="password">비밀번호</LoginLabel>
           <TextInputV2
             id="password"
             size="md"
             width="100%"
             type="password"
-            {...form.getSimpleProps("password")}
+            placeholder="비밀번호"
+            {...form.getProps("password")}
           />
         </LoginTextInputWrapper>
         <LoginButton status="primary" onClick={login} size="md">
-          Login
+          로그인
         </LoginButton>
+        <RegisterWrapper>
+          <RegisterLink to="/register">회원가입</RegisterLink>
+        </RegisterWrapper>
       </LoginBox>
     </Wrapper>
   );
@@ -53,25 +58,41 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const LoginBox = styled.div`
+const LoginBox = styled(Card)`
   width: 400px;
+  padding: 30px;
+
+  @media screen and (max-width: 400px) {
+    width: 100%;
+    margin: 16px;
+  }
 `;
 
 const LoginButton = styled(ButtonV2)`
   width: 100%;
+  margin-bottom: 16px;
 `;
 
 const LoginTextInputWrapper = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 
   &:last-of-type {
     margin-bottom: 20px;
   }
 `;
 
-const LoginLabel = styled(Label)`
-  margin-bottom: 4px;
-  color: ${(props) => props.theme.palette.text.TertiaryText};
+const RegisterWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const RegisterLink = styled(Link)`
+  ${foundations.typography.Body2};
+  color: ${(props) => props.theme.palette.text.PrimaryText};
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default PasswordLoginPageBody;
