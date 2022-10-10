@@ -5,7 +5,7 @@ import { PrivateRoute } from "lib/router";
 
 import Layout from "../Layout";
 
-const HomePage = lazy(() => import("./home/HomePage"));
+const MainPage = lazy(() => import("./main/MainPage"));
 const LoginPage = lazy(() => import("./login/LoginPage"));
 const NotFound = lazy(() => import("./NotFound"));
 
@@ -13,7 +13,7 @@ const Routes = () => (
   <Layout>
     <Suspense fallback={<div />}>
       <Switch>
-        <PrivateRoute exact path="/main" component={HomePage} />
+        <PrivateRoute exact path="/main" component={MainPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route component={NotFound} />
       </Switch>
