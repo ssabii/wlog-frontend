@@ -7,6 +7,7 @@ import Layout from "../Layout";
 
 const MainPage = lazy(() => import("./main/MainPage"));
 const LoginPage = lazy(() => import("./login/LoginPage"));
+const RegisterPage = lazy(() => import("./register/RegisterPage"));
 const NotFound = lazy(() => import("./NotFound"));
 
 const Routes = () => (
@@ -15,6 +16,7 @@ const Routes = () => (
       <Switch>
         <PrivateRoute exact path="/main" component={MainPage} />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>
