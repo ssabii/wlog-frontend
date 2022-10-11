@@ -19,6 +19,12 @@ const auth = {
     }),
   refresh: () => client.post<LoginResponse>("/refresh"),
   logout: () => client.get("/logout"),
+  register: (username: string, password: string, displayName: string) =>
+    client.post("/register", {
+      username,
+      password,
+      displayName,
+    }),
 };
 
 export default auth;
