@@ -17,7 +17,7 @@ const Layout = observer(({ children }: LayoutProps) => (
   <Body>
     <Switch>
       <Route path={["/login", "/register"]}>{children}</Route>
-      <Route path={["/main"]}>
+      <Route exact path={["/main"]}>
         <GlobalNavigationBar />
         <Main>{children}</Main>
       </Route>

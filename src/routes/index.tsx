@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { lazy, Suspense, useCallback } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import { PrivateRoute } from "lib/router";
 
@@ -10,17 +10,22 @@ const LoginPage = lazy(() => import("./login/LoginPage"));
 const RegisterPage = lazy(() => import("./register/RegisterPage"));
 const NotFound = lazy(() => import("./NotFound"));
 
-const Routes = () => (
-  <Layout>
-    <Suspense fallback={<div />}>
-      <Switch>
-        <PrivateRoute exact path="/main" component={MainPage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
-        <Route component={NotFound} />
-      </Switch>
-    </Suspense>
-  </Layout>
-);
+const Routes = () => {
+  const redirectFromRoot = useCallback(() => <Redirect to="/main" />, []);
+
+  return (
+    <Layout>
+      <Suspense fallback={<div />}>
+        <Switch>
+          <PrivateRoute exact path="/main" component={MainPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/" component={redirectFromRoot} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
+    </Layout>
+  );
+};
 
 export default Routes;
